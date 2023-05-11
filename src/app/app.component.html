@@ -1,4 +1,8 @@
 <div class="container mx-auto w-25 my-4">
-  <app-input-data></app-input-data>
-  <app-weather-card></app-weather-card>
+  <app-input-data (cityEvent)="onCityEvent($any($event))"></app-input-data>
+
+  <div *ngIf="status==false; else elseBlock">No City Selected.</div>
+  <ng-template #elseBlock>
+    <app-weather-card [city]="city"></app-weather-card>
+  </ng-template>
 </div>

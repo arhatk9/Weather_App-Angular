@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'weather-app';
+
+  city: string;
+  status:boolean; 
+  constructor() {
+    this.city = '';
+    this.status = false;
+  }
+
+
+  onCityEvent(data: string) {
+    this.city = data;
+    this.status = true;
+  }
+
+
 }
