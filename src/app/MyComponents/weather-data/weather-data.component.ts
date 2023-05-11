@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Weather } from '../Models/Weather';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,10 +7,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './weather-data.component.html',
   styleUrls: ['./weather-data.component.css']
 })
-
-
-export class WeatherDataComponent {
-
+export class WeatherDataComponent implements OnChanges {
   @Input() city: string;
   weatherData!: Weather;
   weather: any;
@@ -18,10 +15,13 @@ export class WeatherDataComponent {
   constructor(private http: HttpClient) {
     this.city = '';
     this.weatherData = new Weather();
-    
   }
 
-  ngOnInit(): void {
+  ngOnChanges() {
+    this.onSubmit();
+  }
+
+  onSubmit() {
     console.log("Hello" + this.city)
     this.http.get<any>(
       `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=d80bbbc532dbf0ad01e49e049438c4b6`
@@ -43,6 +43,4 @@ export class WeatherDataComponent {
       }
     );
   }
-
-
 }
